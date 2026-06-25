@@ -1,5 +1,5 @@
 /**
- * STRATEGIZE // Core Application JavaScript
+ * STRATEGIZE // Core Application JavaScript (15-Section Restructure)
  * Handles state management, local storage, tab navigation,
  * dynamic widget rendering, progress calculation, and JSON export/import.
  */
@@ -10,38 +10,107 @@
 let state = {
   // Static fields (mapped by DOM ID)
   staticFields: {
+    // 1. Business Overview
     'company-name': '',
-    'market-description': '',
-    'value-proposition': '',
+    'company-industry': '',
+    'company-products': '',
+    'company-usp': '',
+    'company-position': '',
+    'company-goals': '',
+    
+    // 2. Situation Analysis
+    'situation-market': '',
+    'situation-competitor': '',
     'swot-s': '',
     'swot-w': '',
     'swot-o': '',
     'swot-t': '',
-    'brand-tagline': '',
-    'elevator-pitch': '',
-    'pillar1-title': '',
-    'pillar1-desc': '',
-    'pillar2-title': '',
-    'pillar2-desc': '',
-    'pillar3-title': '',
-    'pillar3-desc': '',
-    'strategy-content': '',
-    'strategy-social': '',
-    'strategy-media': '',
-    'strategy-influencers': '',
-    'strategy-activations': '',
-    'primary-kpis': '',
-    'budget-allocation': ''
+
+    // 3. Target Audience
+    'audience-primary': '',
+    'audience-psychographics': '',
+    'audience-painpoints': '',
+    'audience-journey': '',
+
+    // 5. Marketing Objectives
+    'obj-brand': '',
+    'obj-leads': '',
+    'obj-sales': '',
+    'obj-retention': '',
+    'obj-smart-helper': '',
+
+    // 6. Brand Positioning
+    'pos-statement': '',
+    'pos-personality': '',
+    'pos-tone': '',
+
+    // 7. Value Proposition
+    'vp-functional': '',
+    'vp-emotional': '',
+    'vp-economic': '',
+
+    // 8. Marketing Mix (7Ps)
+    'mix-product': '',
+    'mix-price': '',
+    'mix-place': '',
+    'mix-promotion': '',
+    'mix-people': '',
+    'mix-process': '',
+    'mix-physical': '',
+
+    // 9. Content Strategy
+    'content-pillars': '',
+    'content-messages': '',
+    'content-formats': '',
+
+    // 10. Channel Strategy
+    'chan-social': '',
+    'chan-influencers': '',
+    'chan-paid': '',
+    'chan-email': '',
+    'chan-seo': '',
+    'chan-partners': '',
+
+    // 11. Campaign Strategy
+    'camp-awareness': '',
+    'camp-consideration': '',
+    'camp-conversion': '',
+    'camp-retention': '',
+
+    // 12. Budget Allocation
+    'bud-content': '',
+    'bud-ads': '',
+    'bud-influencers': '',
+    'bud-production': '',
+    'bud-events': '',
+    'bud-research': '',
+
+    // 13. KPIs
+    'kpi-awareness': '',
+    'kpi-engagement': '',
+    'kpi-lead': '',
+    'kpi-conversion': '',
+    'kpi-retention': '',
+    'kpi-roi': '',
+
+    // 14. Implementation Timeline
+    'time-m1': '',
+    'time-m2': '',
+    'time-m3': '',
+    'time-m4': '',
+
+    // 15. Recommendations
+    'rec-quick': '',
+    'rec-medium': '',
+    'rec-long': ''
   },
-  // Dynamic lists
-  personas: [],
-  competitors: [],
-  goals: [],
-  milestones: []
+  
+  // Dynamic list for Buyer Personas
+  personas: []
 };
 
 // LocalStorage Keys
-const STORAGE_KEY = 'strategize_marketing_state';
+const STORAGE_KEY = 'strategize_marketing_15_state';
 
 // Debounce timer for auto-save
 let saveTimeout = null;
@@ -50,36 +119,14 @@ let saveTimeout = null;
 const generateId = () => '_' + Math.random().toString(36).substr(2, 9);
 
 // Default dynamic items templates
-const createDefaultPersona = () => ({
+const createDefaultPersona = (num) => ({
   id: generateId(),
-  name: '',
-  demographics: '',
+  name: `Buyer Persona ${num || ''}`,
+  age: '',
+  occupation: '',
   goals: '',
-  challenges: ''
-});
-
-const createDefaultCompetitor = () => ({
-  id: generateId(),
-  name: '',
-  strengths: '',
-  weaknesses: '',
-  share: '',
-  positioning: ''
-});
-
-const createDefaultGoal = () => ({
-  id: generateId(),
-  description: '',
-  kpi: '',
-  date: ''
-});
-
-const createDefaultMilestone = () => ({
-  id: generateId(),
-  date: '',
-  title: '',
-  owner: '',
-  status: 'Planned' // Planned, In Progress, Completed
+  challenges: '',
+  triggers: ''
 });
 
 // ==========================================================================
@@ -89,7 +136,7 @@ document.addEventListener('DOMContentLoaded', () => {
   loadData();
   setupNavigation();
   setupEventListeners();
-  renderAllDynamicLists();
+  renderPersonas();
   updateProgress();
 });
 
@@ -140,28 +187,21 @@ function loadData() {
       }
       // Restore dynamic lists
       state.personas = parsed.personas || [];
-      state.competitors = parsed.competitors || [];
-      state.goals = parsed.goals || [];
-      state.milestones = parsed.milestones || [];
     } catch (e) {
       console.error("Error reading saved strategy state:", e);
     }
   } else {
-    // Seed default state with one empty element each for guide rails
-    state.personas.push(createDefaultPersona());
-    state.competitors.push(createDefaultCompetitor());
-    state.goals.push(createDefaultGoal());
-    state.milestones.push(createDefaultMilestone());
+    // Seed default personas
+    state.personas.push(createDefaultPersona(1));
+    state.personas.push(createDefaultPersona(2));
   }
 }
 
 function saveData(immediate = false) {
   const statusEl = document.querySelector('.sidebar-footer');
-  const textEl = document.getElementById('save-status');
   
-  if (statusEl && textEl) {
+  if (statusEl) {
     statusEl.classList.add('saving');
-    textEl.textContent = 'Saving...';
   }
 
   // Update static fields from DOM
@@ -174,9 +214,8 @@ function saveData(immediate = false) {
 
   const runSave = () => {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
-    if (statusEl && textEl) {
+    if (statusEl) {
       statusEl.classList.remove('saving');
-      textEl.textContent = 'Saved locally';
     }
     updateProgress();
   };
@@ -186,22 +225,13 @@ function saveData(immediate = false) {
     runSave();
   } else {
     if (saveTimeout) clearTimeout(saveTimeout);
-    saveTimeout = setTimeout(runSave, 800); // Debounce saves by 800ms
+    saveTimeout = setTimeout(runSave, 600); // Debounce saves by 600ms
   }
 }
 
 // ==========================================================================
 // DYNAMIC COMPONENT RENDERING
 // ==========================================================================
-function renderAllDynamicLists() {
-  renderPersonas();
-  renderCompetitors();
-  renderGoals();
-  renderMilestones();
-  adjustTextareaHeights();
-}
-
-// 1. Audience Personas
 function renderPersonas() {
   const container = document.getElementById('personas-container');
   if (!container) return;
@@ -217,21 +247,27 @@ function renderPersonas() {
           <line x1="6" y1="6" x2="18" y2="18"/>
         </svg>
       </button>
-      <div class="form-group">
-        <label>Persona Name / Segment ${index + 1}</label>
-        <input type="text" class="p-name" value="${persona.name || ''}" placeholder="e.g., Tech-savvy Millennial, Enterprise IT Buyer...">
+      <div class="form-grid">
+        <div class="form-group">
+          <label>Persona Name</label>
+          <input type="text" class="p-name" value="${persona.name || ''}" placeholder="e.g. Persona ${index+1}">
+        </div>
+        <div class="form-group">
+          <label>Age & Occupation</label>
+          <input type="text" class="p-age-occ" value="${persona.age || ''}" placeholder="e.g., 28, Product Manager">
+        </div>
       </div>
       <div class="form-group">
-        <label>Demographics & Traits</label>
-        <input type="text" class="p-demo" value="${persona.demographics || ''}" placeholder="Age, Occupation, Budget, Key Channels...">
+        <label>Goals</label>
+        <textarea class="p-goals mini-textarea" placeholder="What are their professional or personal goals?">${persona.goals || ''}</textarea>
       </div>
       <div class="form-group">
-        <label>Goals & Motivations</label>
-        <textarea class="p-goals mini-textarea" placeholder="What are they trying to achieve? What drives their purchase decision?">${persona.goals || ''}</textarea>
+        <label>Challenges</label>
+        <textarea class="p-challenges mini-textarea" placeholder="What pain points block them?">${persona.challenges || ''}</textarea>
       </div>
       <div class="form-group">
-        <label>Core Challenges & Pain Points</label>
-        <textarea class="p-challenges mini-textarea" placeholder="What frustrates them with current solutions? Where are their obstacles?">${persona.challenges || ''}</textarea>
+        <label>Buying Triggers</label>
+        <textarea class="p-triggers mini-textarea" placeholder="What motivates them to purchase?">${persona.triggers || ''}</textarea>
       </div>
     `;
 
@@ -239,9 +275,12 @@ function renderPersonas() {
     card.querySelectorAll('input, textarea').forEach(el => {
       el.addEventListener('input', () => {
         if (el.classList.contains('p-name')) persona.name = el.value;
-        if (el.classList.contains('p-demo')) persona.demographics = el.value;
+        if (el.classList.contains('p-age-occ')) {
+          persona.age = el.value; // Store age/occupation in the variable
+        }
         if (el.classList.contains('p-goals')) persona.goals = el.value;
         if (el.classList.contains('p-challenges')) persona.challenges = el.value;
+        if (el.classList.contains('p-triggers')) persona.triggers = el.value;
         saveData();
       });
     });
@@ -257,179 +296,6 @@ function renderPersonas() {
   });
 }
 
-// 2. Competitor Matrix
-function renderCompetitors() {
-  const container = document.getElementById('competitors-container');
-  if (!container) return;
-  container.innerHTML = '';
-
-  state.competitors.forEach((comp, index) => {
-    const card = document.createElement('div');
-    card.className = 'dynamic-card';
-    card.innerHTML = `
-      <button class="card-remove-btn" data-id="${comp.id}" title="Remove Competitor">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-          <line x1="18" y1="6" x2="6" y2="18"/>
-          <line x1="6" y1="6" x2="18" y2="18"/>
-        </svg>
-      </button>
-      <div class="competitor-meta-row">
-        <div class="form-group">
-          <label>Competitor Name ${index + 1}</label>
-          <input type="text" class="c-name" value="${comp.name || ''}" placeholder="Competitor company name...">
-        </div>
-        <div class="form-group">
-          <label>Market Share (%)</label>
-          <input type="text" class="c-share" value="${comp.share || ''}" placeholder="e.g., 25% or High...">
-        </div>
-      </div>
-      <div class="form-group">
-        <label>Market Positioning & Focus</label>
-        <input type="text" class="c-pos" value="${comp.positioning || ''}" placeholder="e.g., Premium pricing, low cost, developer-first...">
-      </div>
-      <div class="form-group">
-        <label>Key Strengths</label>
-        <textarea class="c-strengths mini-textarea" placeholder="What do they do exceptionally well? Brand reputation, features?">${comp.strengths || ''}</textarea>
-      </div>
-      <div class="form-group">
-        <label>Key Weaknesses & Vulnerabilities</label>
-        <textarea class="c-weaknesses mini-textarea" placeholder="Where do they struggle? Customer service, outdated tech?">${comp.weaknesses || ''}</textarea>
-      </div>
-    `;
-
-    card.querySelectorAll('input, textarea').forEach(el => {
-      el.addEventListener('input', () => {
-        if (el.classList.contains('c-name')) comp.name = el.value;
-        if (el.classList.contains('c-share')) comp.share = el.value;
-        if (el.classList.contains('c-pos')) comp.positioning = el.value;
-        if (el.classList.contains('c-strengths')) comp.strengths = el.value;
-        if (el.classList.contains('c-weaknesses')) comp.weaknesses = el.value;
-        saveData();
-      });
-    });
-
-    card.querySelector('.card-remove-btn').addEventListener('click', () => {
-      state.competitors = state.competitors.filter(c => c.id !== comp.id);
-      renderCompetitors();
-      saveData(true);
-    });
-
-    container.appendChild(card);
-  });
-}
-
-// 3. Objectives & SMART Goals
-function renderGoals() {
-  const container = document.getElementById('goals-container');
-  if (!container) return;
-  container.innerHTML = '';
-
-  state.goals.forEach((goal, index) => {
-    const item = document.createElement('div');
-    item.className = 'goal-item';
-    item.innerHTML = `
-      <button class="card-remove-btn" data-id="${goal.id}" title="Remove Goal">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-          <line x1="18" y1="6" x2="6" y2="18"/>
-          <line x1="6" y1="6" x2="18" y2="18"/>
-        </svg>
-      </button>
-      <div class="form-group">
-        <label>Goal Objective ${index + 1}</label>
-        <input type="text" class="g-desc" value="${goal.description || ''}" placeholder="e.g., Increase organic SaaS signups by 30%...">
-      </div>
-      <div class="form-group">
-        <label>Success Metric / KPI Target</label>
-        <input type="text" class="g-kpi" value="${goal.kpi || ''}" placeholder="e.g., 1,500 new trials/mo...">
-      </div>
-      <div class="form-group">
-        <label>Target Date</label>
-        <input type="date" class="g-date" value="${goal.date || ''}">
-      </div>
-    `;
-
-    item.querySelectorAll('input').forEach(el => {
-      el.addEventListener('input', () => {
-        if (el.classList.contains('g-desc')) goal.description = el.value;
-        if (el.classList.contains('g-kpi')) goal.kpi = el.value;
-        if (el.classList.contains('g-date')) goal.date = el.value;
-        saveData();
-      });
-    });
-
-    item.querySelector('.card-remove-btn').addEventListener('click', () => {
-      state.goals = state.goals.filter(g => g.id !== goal.id);
-      renderGoals();
-      saveData(true);
-    });
-
-    container.appendChild(item);
-  });
-}
-
-// 4. Timeline Milestones
-function renderMilestones() {
-  const container = document.getElementById('timeline-container');
-  if (!container) return;
-  container.innerHTML = '';
-
-  state.milestones.forEach((milestone, index) => {
-    const node = document.createElement('div');
-    node.className = 'timeline-node';
-    
-    const plannedSelected = milestone.status === 'Planned' ? 'selected' : '';
-    const progressSelected = milestone.status === 'In Progress' ? 'selected' : '';
-    const completedSelected = milestone.status === 'Completed' ? 'selected' : '';
-
-    node.innerHTML = `
-      <button class="card-remove-btn" data-id="${milestone.id}" title="Remove Milestone">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-          <line x1="18" y1="6" x2="6" y2="18"/>
-          <line x1="6" y1="6" x2="18" y2="18"/>
-        </svg>
-      </button>
-      <div class="form-group">
-        <label>Target Date</label>
-        <input type="date" class="m-date" value="${milestone.date || ''}">
-      </div>
-      <div class="form-group">
-        <label>Milestone Initiative / Task</label>
-        <input type="text" class="m-title" value="${milestone.title || ''}" placeholder="e.g., Website Rebrand Launch...">
-      </div>
-      <div class="form-group">
-        <label>Lead Owner</label>
-        <input type="text" class="m-owner" value="${milestone.owner || ''}" placeholder="e.g., Product Marketing...">
-      </div>
-      <div class="form-group">
-        <label>Status</label>
-        <select class="m-status">
-          <option value="Planned" ${plannedSelected}>Planned</option>
-          <option value="In Progress" ${progressSelected}>In Progress</option>
-          <option value="Completed" ${completedSelected}>Completed</option>
-        </select>
-      </div>
-    `;
-
-    node.querySelectorAll('input, select').forEach(el => {
-      el.addEventListener('input', () => {
-        if (el.classList.contains('m-date')) milestone.date = el.value;
-        if (el.classList.contains('m-title')) milestone.title = el.value;
-        if (el.classList.contains('m-owner')) milestone.owner = el.value;
-        if (el.classList.contains('m-status')) milestone.status = el.value;
-        saveData();
-      });
-    });
-
-    node.querySelector('.card-remove-btn').addEventListener('click', () => {
-      state.milestones = state.milestones.filter(m => m.id !== milestone.id);
-      renderMilestones();
-      saveData(true);
-    });
-
-    container.appendChild(node);
-  });
-}
-
 // Helper to auto-fit textarea height
 function adjustTextareaHeights() {
   document.querySelectorAll('textarea').forEach(textarea => {
@@ -439,31 +305,25 @@ function adjustTextareaHeights() {
 }
 
 // ==========================================================================
-// STRATEGY COMPLETION PROGRESS LOGIC
+// COMPLETION PROGRESS CALCULATION
 // ==========================================================================
 function updateProgress() {
-  // Define mapping of sections to input groups
   const sectionInputs = {
-    overview: [
-      'company-name', 'market-description', 'value-proposition',
-      'swot-s', 'swot-w', 'swot-o', 'swot-t'
-    ],
-    audience: [], // calculated dynamically
-    competitors: [], // calculated dynamically
-    objectives: [], // calculated dynamically
-    positioning: [
-      'brand-tagline', 'elevator-pitch',
-      'pillar1-title', 'pillar1-desc',
-      'pillar2-title', 'pillar2-desc',
-      'pillar3-title', 'pillar3-desc'
-    ],
-    strategy: [
-      'strategy-content', 'strategy-social', 'strategy-media',
-      'strategy-influencers', 'strategy-activations'
-    ],
-    kpis: [
-      'primary-kpis', 'budget-allocation'
-    ]
+    overview: ['company-name', 'company-industry', 'company-products', 'company-usp', 'company-position', 'company-goals'],
+    situation: ['situation-market', 'situation-competitor', 'swot-s', 'swot-w', 'swot-o', 'swot-t'],
+    audience: ['audience-primary', 'audience-psychographics', 'audience-painpoints', 'audience-journey'],
+    personas: [], // dynamic personas list
+    objectives: ['obj-brand', 'obj-leads', 'obj-sales', 'obj-retention', 'obj-smart-helper'],
+    positioning: ['pos-statement', 'pos-personality', 'pos-tone'],
+    valprop: ['vp-functional', 'vp-emotional', 'vp-economic'],
+    marketingmix: ['mix-product', 'mix-price', 'mix-place', 'mix-promotion', 'mix-people', 'mix-process', 'mix-physical'],
+    contentstrategy: ['content-pillars', 'content-messages', 'content-formats'],
+    channelstrategy: ['chan-social', 'chan-influencers', 'chan-paid', 'chan-email', 'chan-seo', 'chan-partners'],
+    campaignstrategy: ['camp-awareness', 'camp-consideration', 'camp-conversion', 'camp-retention'],
+    budget: ['bud-content', 'bud-ads', 'bud-influencers', 'bud-production', 'bud-events', 'bud-research'],
+    kpis: ['kpi-awareness', 'kpi-engagement', 'kpi-lead', 'kpi-conversion', 'kpi-retention', 'kpi-roi'],
+    timeline: ['time-m1', 'time-m2', 'time-m3', 'time-m4'],
+    recommendations: ['rec-quick', 'rec-medium', 'rec-long']
   };
 
   let totalFields = 0;
@@ -471,7 +331,7 @@ function updateProgress() {
 
   // Process static sections
   for (const [section, fieldIds] of Object.entries(sectionInputs)) {
-    if (fieldIds.length === 0) continue; // skip dynamic lists here
+    if (fieldIds.length === 0) continue;
     
     let sectionTotal = fieldIds.length;
     let sectionFilled = 0;
@@ -486,96 +346,30 @@ function updateProgress() {
     totalFields += sectionTotal;
     filledFields += sectionFilled;
 
-    // Update section indicator dot badge in sidebar
     updateSectionBadgeStatus(section, sectionFilled / sectionTotal);
   }
 
-  // Process dynamic lists
-  // 1. Personas
+  // Process Personas list
   let personasScore = 0;
   if (state.personas.length > 0) {
-    const personaFields = state.personas.length * 4;
+    const personaFields = state.personas.length * 5;
     state.personas.forEach(p => {
       if (p.name && p.name.trim() !== '') personasScore++;
-      if (p.demographics && p.demographics.trim() !== '') personasScore++;
+      if (p.age && p.age.trim() !== '') personasScore++;
       if (p.goals && p.goals.trim() !== '') personasScore++;
       if (p.challenges && p.challenges.trim() !== '') personasScore++;
+      if (p.triggers && p.triggers.trim() !== '') personasScore++;
     });
     totalFields += personaFields;
     filledFields += personasScore;
-    updateSectionBadgeStatus('audience', personasScore / personaFields);
+    updateSectionBadgeStatus('personas', personasScore / personaFields);
   } else {
-    // If no persona exists, mark as incomplete (0%)
-    updateSectionBadgeStatus('audience', 0);
-  }
-
-  // 2. Competitors
-  let competitorScore = 0;
-  if (state.competitors.length > 0) {
-    const compFields = state.competitors.length * 5;
-    state.competitors.forEach(c => {
-      if (c.name && c.name.trim() !== '') competitorScore++;
-      if (c.share && c.share.trim() !== '') competitorScore++;
-      if (c.positioning && c.positioning.trim() !== '') competitorScore++;
-      if (c.strengths && c.strengths.trim() !== '') competitorScore++;
-      if (c.weaknesses && c.weaknesses.trim() !== '') competitorScore++;
-    });
-    totalFields += compFields;
-    filledFields += competitorScore;
-    updateSectionBadgeStatus('competitors', competitorScore / compFields);
-  } else {
-    updateSectionBadgeStatus('competitors', 0);
-  }
-
-  // 3. Objectives / SMART Goals
-  let goalsScore = 0;
-  if (state.goals.length > 0) {
-    const goalFields = state.goals.length * 3;
-    state.goals.forEach(g => {
-      if (g.description && g.description.trim() !== '') goalsScore++;
-      if (g.kpi && g.kpi.trim() !== '') goalsScore++;
-      if (g.date && g.date.trim() !== '') goalsScore++;
-    });
-    totalFields += goalFields;
-    filledFields += goalsScore;
-    updateSectionBadgeStatus('objectives', goalsScore / goalFields);
-  } else {
-    updateSectionBadgeStatus('objectives', 0);
-  }
-
-  // 4. Timeline
-  let milestoneScore = 0;
-  let milestoneTotalFields = state.staticFields['primary-kpis'].trim() !== '' ? 1 : 0;
-  milestoneTotalFields += state.staticFields['budget-allocation'].trim() !== '' ? 1 : 0;
-  
-  if (state.milestones.length > 0) {
-    const mFields = state.milestones.length * 4;
-    state.milestones.forEach(m => {
-      if (m.date && m.date.trim() !== '') milestoneScore++;
-      if (m.title && m.title.trim() !== '') milestoneScore++;
-      if (m.owner && m.owner.trim() !== '') milestoneScore++;
-      if (m.status && m.status.trim() !== '') milestoneScore++;
-    });
-    totalFields += mFields;
-    filledFields += milestoneScore;
-    
-    // Combine KPI static fields and Milestones for Section 7 indicator
-    const totalKPISectionFields = mFields + 2;
-    let kpiStaticScore = 0;
-    if (state.staticFields['primary-kpis'].trim() !== '') kpiStaticScore++;
-    if (state.staticFields['budget-allocation'].trim() !== '') kpiStaticScore++;
-    updateSectionBadgeStatus('kpis', (milestoneScore + kpiStaticScore) / totalKPISectionFields);
-  } else {
-    let kpiStaticScore = 0;
-    if (state.staticFields['primary-kpis'].trim() !== '') kpiStaticScore++;
-    if (state.staticFields['budget-allocation'].trim() !== '') kpiStaticScore++;
-    updateSectionBadgeStatus('kpis', kpiStaticScore / 2);
+    updateSectionBadgeStatus('personas', 0);
   }
 
   // Calculate overall percentage
   const percent = totalFields > 0 ? Math.round((filledFields / totalFields) * 100) : 0;
   
-  // Update sidebar headers
   const fillBar = document.getElementById('progress-fill');
   const percentText = document.getElementById('progress-percent');
   if (fillBar) fillBar.style.width = `${percent}%`;
@@ -594,89 +388,60 @@ function updateSectionBadgeStatus(sectionId, ratio) {
 }
 
 // ==========================================================================
-// EXPORT, IMPORT, AND UTILITIES
+// UTILITIES & EVENT LISTENERS
 // ==========================================================================
 function setupEventListeners() {
-  // Static fields auto-save on input/textarea change
+  // Static fields auto-save on change
   document.querySelectorAll('[data-save]').forEach(el => {
     el.addEventListener('input', () => saveData());
   });
 
-  // Dynamic content add buttons
+  // Dynamic add buttons
   document.getElementById('btn-add-persona').addEventListener('click', () => {
-    state.personas.push(createDefaultPersona());
+    state.personas.push(createDefaultPersona(state.personas.length + 1));
     renderPersonas();
     saveData(true);
   });
 
-  document.getElementById('btn-add-competitor').addEventListener('click', () => {
-    state.competitors.push(createDefaultCompetitor());
-    renderCompetitors();
-    saveData(true);
-  });
-
-  document.getElementById('btn-add-goal').addEventListener('click', () => {
-    state.goals.push(createDefaultGoal());
-    renderGoals();
-    saveData(true);
-  });
-
-  document.getElementById('btn-add-milestone').addEventListener('click', () => {
-    state.milestones.push(createDefaultMilestone());
-    renderMilestones();
-    saveData(true);
-  });
-
-  // Reset Application Data
+  // Reset workspace
   document.getElementById('btn-reset').addEventListener('click', () => {
-    const confirmReset = confirm("Are you sure you want to reset your workspace? All draft data will be permanently wiped.");
+    const confirmReset = confirm("Are you sure you want to reset your 15-Section Strategy Builder? This will wipe all progress.");
     if (confirmReset) {
       localStorage.removeItem(STORAGE_KEY);
       state = {
         staticFields: {
-          'company-name': '',
-          'market-description': '',
-          'value-proposition': '',
-          'swot-s': '',
-          'swot-w': '',
-          'swot-o': '',
-          'swot-t': '',
-          'brand-tagline': '',
-          'elevator-pitch': '',
-          'pillar1-title': '',
-          'pillar1-desc': '',
-          'pillar2-title': '',
-          'pillar2-desc': '',
-          'pillar3-title': '',
-          'pillar3-desc': '',
-          'strategy-content': '',
-          'strategy-social': '',
-          'strategy-media': '',
-          'strategy-influencers': '',
-          'strategy-activations': '',
-          'primary-kpis': '',
-          'budget-allocation': ''
+          'company-name': '', 'company-industry': '', 'company-products': '', 'company-usp': '', 'company-position': '', 'company-goals': '',
+          'situation-market': '', 'situation-competitor': '', 'swot-s': '', 'swot-w': '', 'swot-o': '', 'swot-t': '',
+          'audience-primary': '', 'audience-psychographics': '', 'audience-painpoints': '', 'audience-journey': '',
+          'obj-brand': '', 'obj-leads': '', 'obj-sales': '', 'obj-retention': '', 'obj-smart-helper': '',
+          'pos-statement': '', 'pos-personality': '', 'pos-tone': '',
+          'vp-functional': '', 'vp-emotional': '', 'vp-economic': '',
+          'mix-product': '', 'mix-price': '', 'mix-place': '', 'mix-promotion': '', 'mix-people': '', 'mix-process': '', 'mix-physical': '',
+          'content-pillars': '', 'content-messages': '', 'content-formats': '',
+          'chan-social': '', 'chan-influencers': '', 'chan-paid': '', 'chan-email': '', 'chan-seo': '', 'chan-partners': '',
+          'camp-awareness': '', 'camp-consideration': '', 'camp-conversion': '', 'camp-retention': '',
+          'bud-content': '', 'bud-ads': '', 'bud-influencers': '', 'bud-production': '', 'bud-events': '', 'bud-research': '',
+          'kpi-awareness': '', 'kpi-engagement': '', 'kpi-lead': '', 'kpi-conversion': '', 'kpi-retention': '', 'kpi-roi': '',
+          'time-m1': '', 'time-m2': '', 'time-m3': '', 'time-m4': '',
+          'rec-quick': '', 'rec-medium': '', 'rec-long': ''
         },
-        personas: [createDefaultPersona()],
-        competitors: [createDefaultCompetitor()],
-        goals: [createDefaultGoal()],
-        milestones: [createDefaultMilestone()]
+        personas: [createDefaultPersona(1), createDefaultPersona(2)]
       };
       
-      // Wipe DOM input fields
+      // Clear all HTML inputs
       for (const id of Object.keys(state.staticFields)) {
         const el = document.getElementById(id);
         if (el) el.value = '';
       }
       
-      renderAllDynamicLists();
+      renderPersonas();
       saveData(true);
     }
   });
 
   // Export JSON file
   document.getElementById('btn-export').addEventListener('click', () => {
-    saveData(immediate = true);
+    saveData(true);
     const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(state, null, 2));
     const company = state.staticFields['company-name'] ? state.staticFields['company-name'].toLowerCase().replace(/[^a-z0-9]/g, '_') : 'my';
     const filename = `marketing_strategy_${company}_${new Date().toISOString().slice(0,10)}.json`;
@@ -689,7 +454,7 @@ function setupEventListeners() {
     downloadAnchor.remove();
   });
 
-  // Import JSON trigger uploader
+  // Import JSON uploader
   const fileUploader = document.getElementById('import-file');
   document.getElementById('btn-import-trigger').addEventListener('click', () => {
     fileUploader.click();
@@ -703,12 +468,9 @@ function setupEventListeners() {
     reader.onload = (event) => {
       try {
         const parsed = JSON.parse(event.target.result);
-        if (parsed.staticFields || parsed.personas || parsed.competitors) {
+        if (parsed.staticFields || parsed.personas) {
           state.staticFields = { ...state.staticFields, ...parsed.staticFields };
           state.personas = parsed.personas || [];
-          state.competitors = parsed.competitors || [];
-          state.goals = parsed.goals || [];
-          state.milestones = parsed.milestones || [];
 
           // Populate static inputs
           for (const [id, val] of Object.entries(state.staticFields)) {
@@ -716,7 +478,7 @@ function setupEventListeners() {
             if (el) el.value = val || '';
           }
 
-          renderAllDynamicLists();
+          renderPersonas();
           saveData(true);
           alert("Strategy data successfully imported!");
         } else {
@@ -727,7 +489,7 @@ function setupEventListeners() {
       }
     };
     reader.readAsText(file);
-    fileUploader.value = ''; // clear value to allow uploading same file again
+    fileUploader.value = '';
   });
 
   // Print Strategy as PDF Document
@@ -739,7 +501,7 @@ function setupEventListeners() {
 }
 
 // ==========================================================================
-// PRINT FORMATTER
+// PRINT CONTROLLER & BUILDER (15 SECTIONS)
 // ==========================================================================
 function buildPrintView() {
   const printContainer = document.getElementById('print-content');
@@ -748,278 +510,226 @@ function buildPrintView() {
   
   if (!printContainer) return;
   
-  // Set meta values
   const companyNameVal = state.staticFields['company-name'] || 'Unnamed Brand';
-  printBrandTitle.textContent = `${companyNameVal.toUpperCase()} // MARKETING STRATEGY PLAN`;
+  printBrandTitle.textContent = `${companyNameVal.toUpperCase()} // MARKETING STRATEGY HUB`;
   printStamp.textContent = new Date().toLocaleDateString(undefined, { year: 'numeric', month: 'long', day: 'numeric' });
 
-  // Clear previous print contents
   printContainer.innerHTML = '';
-
   const getCleanVal = (val) => (val && val.trim() !== '') ? val.replace(/\n/g, '<br>') : '<em>Not specified</em>';
 
-  // Section 1: Business Overview
-  let swotStrengths = getCleanVal(state.staticFields['swot-s']);
-  let swotWeaknesses = getCleanVal(state.staticFields['swot-w']);
-  let swotOpportunities = getCleanVal(state.staticFields['swot-o']);
-  let swotThreats = getCleanVal(state.staticFields['swot-t']);
-
-  let sec1HTML = `
-    <div class="print-section">
-      <h2>1. Business & Market Overview</h2>
-      <div class="print-field">
-        <div class="print-label">Brand / Company Name</div>
-        <div class="print-value">${getCleanVal(state.staticFields['company-name'])}</div>
-      </div>
-      <div class="print-field">
-        <div class="print-label">Market & Industry Description</div>
-        <div class="print-value">${getCleanVal(state.staticFields['market-description'])}</div>
-      </div>
-      <div class="print-field">
-        <div class="print-label">Unique Value Proposition (UVP)</div>
-        <div class="print-value">${getCleanVal(state.staticFields['value-proposition'])}</div>
-      </div>
-
-      <div class="print-swot-grid">
-        <div class="print-swot-box" style="border-left: 3px solid #10b981;">
-          <div class="print-swot-title" style="color: #10b981;">STRENGTHS (Internal)</div>
-          <div class="print-value">${swotStrengths}</div>
-        </div>
-        <div class="print-swot-box" style="border-left: 3px solid #f43f5e;">
-          <div class="print-swot-title" style="color: #f43f5e;">WEAKNESSES (Internal)</div>
-          <div class="print-value">${swotWeaknesses}</div>
-        </div>
-        <div class="print-swot-box" style="border-left: 3px solid #06b6d4;">
-          <div class="print-swot-title" style="color: #06b6d4;">OPPORTUNITIES (External)</div>
-          <div class="print-value">${swotOpportunities}</div>
-        </div>
-        <div class="print-swot-box" style="border-left: 3px solid #a855f7;">
-          <div class="print-swot-title" style="color: #a855f7;">THREATS (External)</div>
-          <div class="print-value">${swotThreats}</div>
-        </div>
-      </div>
-    </div>
-  `;
-  printContainer.innerHTML += sec1HTML;
-
-  // Section 2: Audience Insights
-  let personasHTML = '';
-  if (state.personas.length > 0) {
-    state.personas.forEach(p => {
-      personasHTML += `
-        <div class="print-item-card">
-          <div class="print-item-title">${p.name || 'Unnamed Segment'}</div>
-          <div class="print-field">
-            <div class="print-label">Demographics & Key Channels</div>
-            <div class="print-value">${getCleanVal(p.demographics)}</div>
+  // Section configs for loop-based compilation
+  const sectionsConfig = [
+    {
+      title: "1. Business Overview",
+      fields: [
+        { label: "Company Name", id: "company-name" },
+        { label: "Industry", id: "company-industry" },
+        { label: "Products / Services Offered", id: "company-products" },
+        { label: "Unique Selling Proposition (USP)", id: "company-usp" },
+        { label: "Current Market Position", id: "company-position" },
+        { label: "Business Goals", id: "company-goals" }
+      ]
+    },
+    {
+      title: "2. Situation Analysis",
+      fields: [
+        { label: "Market Analysis", id: "situation-market" },
+        { label: "Competitor Analysis", id: "situation-competitor" }
+      ],
+      customHTML: `
+        <div class="print-swot-grid">
+          <div class="print-swot-box" style="border-left: 3px solid #10b981;">
+            <div class="print-swot-title" style="color: #10b981;">STRENGTHS</div>
+            <div class="print-value">${getCleanVal(state.staticFields['swot-s'])}</div>
           </div>
-          <div class="print-field">
-            <div class="print-label">Goals & Motivations</div>
-            <div class="print-value">${getCleanVal(p.goals)}</div>
+          <div class="print-swot-box" style="border-left: 3px solid #f43f5e;">
+            <div class="print-swot-title" style="color: #f43f5e;">WEAKNESSES</div>
+            <div class="print-value">${getCleanVal(state.staticFields['swot-w'])}</div>
           </div>
-          <div class="print-field">
-            <div class="print-label">Core Challenges & Pain Points</div>
-            <div class="print-value">${getCleanVal(p.challenges)}</div>
+          <div class="print-swot-box" style="border-left: 3px solid #06b6d4;">
+            <div class="print-swot-title" style="color: #06b6d4;">OPPORTUNITIES</div>
+            <div class="print-value">${getCleanVal(state.staticFields['swot-o'])}</div>
+          </div>
+          <div class="print-swot-box" style="border-left: 3px solid #8b5cf6;">
+            <div class="print-swot-title" style="color: #8b5cf6;">THREATS</div>
+            <div class="print-value">${getCleanVal(state.staticFields['swot-t'])}</div>
           </div>
         </div>
-      `;
-    });
-  } else {
-    personasHTML = '<p><em>No target customer personas documented.</em></p>';
-  }
+      `
+    },
+    {
+      title: "3. Target Audience",
+      fields: [
+        { label: "Primary Audience", id: "audience-primary" },
+        { label: "Psychographics", id: "audience-psychographics" },
+        { label: "Pain Points", id: "audience-painpoints" },
+        { label: "Customer Journey Map", id: "audience-journey" }
+      ]
+    },
+    {
+      title: "4. Buyer Personas",
+      customRender: () => {
+        let html = '';
+        if (state.personas.length > 0) {
+          state.personas.forEach(p => {
+            html += `
+              <div class="print-item-card" style="margin-bottom:15px;">
+                <div class="print-item-title">${p.name || 'Unnamed Persona'} (${p.age || 'Age/Occ not specified'})</div>
+                <div class="print-field">
+                  <div class="print-label">Goals</div>
+                  <div class="print-value">${getCleanVal(p.goals)}</div>
+                </div>
+                <div class="print-field">
+                  <div class="print-label">Challenges</div>
+                  <div class="print-value">${getCleanVal(p.challenges)}</div>
+                </div>
+                <div class="print-field">
+                  <div class="print-label">Buying Triggers</div>
+                  <div class="print-value">${getCleanVal(p.triggers)}</div>
+                </div>
+              </div>
+            `;
+          });
+        } else {
+          html = '<p><em>No buyer personas specified.</em></p>';
+        }
+        return `<div class="print-cards-grid">${html}</div>`;
+      }
+    },
+    {
+      title: "5. Marketing Objectives",
+      fields: [
+        { label: "Brand Awareness Objectives", id: "obj-brand" },
+        { label: "Lead Generation Objectives", id: "obj-leads" },
+        { label: "Sales Objectives", id: "obj-sales" },
+        { label: "Customer Retention Objectives", id: "obj-retention" },
+        { label: "SMART Goals Specification", id: "obj-smart-helper" }
+      ]
+    },
+    {
+      title: "6. Brand Positioning",
+      fields: [
+        { label: "Positioning Statement", id: "pos-statement" },
+        { label: "Brand Personality", id: "pos-personality" },
+        { label: "Tone of Voice Guidelines", id: "pos-tone" }
+      ]
+    },
+    {
+      title: "7. Value Proposition",
+      fields: [
+        { label: "Functional Benefits", id: "vp-functional" },
+        { label: "Emotional Benefits", id: "vp-emotional" },
+        { label: "Economic Benefits", id: "vp-economic" }
+      ]
+    },
+    {
+      title: "8. Marketing Mix (7Ps)",
+      fields: [
+        { label: "Product Strategy", id: "mix-product" },
+        { label: "Price Strategy", id: "mix-price" },
+        { label: "Place Strategy", id: "mix-place" },
+        { label: "Promotion Strategy", id: "mix-promotion" },
+        { label: "People Strategy", id: "mix-people" },
+        { label: "Process Strategy", id: "mix-process" },
+        { label: "Physical Evidence Strategy", id: "mix-physical" }
+      ]
+    },
+    {
+      title: "9. Content Strategy",
+      fields: [
+        { label: "Content Pillars", id: "content-pillars" },
+        { label: "Key Messages", id: "content-messages" },
+        { label: "Content Formats", id: "content-formats" }
+      ]
+    },
+    {
+      title: "10. Channel Strategy",
+      fields: [
+        { label: "Social Media Platform Strategy", id: "chan-social" },
+        { label: "Influencer Marketing Strategy", id: "chan-influencers" },
+        { label: "Paid Media Strategy", id: "chan-paid" },
+        { label: "Email Marketing Strategy", id: "chan-email" },
+        { label: "Website / SEO Strategy", id: "chan-seo" },
+        { label: "Partnerships & Alliances", id: "chan-partners" }
+      ]
+    },
+    {
+      title: "11. Campaign Strategy",
+      fields: [
+        { label: "Awareness Campaign Outlines", id: "camp-awareness" },
+        { label: "Consideration Campaign Outlines", id: "camp-consideration" },
+        { label: "Conversion Campaign Outlines", id: "camp-conversion" },
+        { label: "Retention Campaign Outlines", id: "camp-retention" }
+      ]
+    },
+    {
+      title: "12. Budget Allocation",
+      fields: [
+        { label: "Content Creation Budget", id: "bud-content" },
+        { label: "Paid Advertising Budget", id: "bud-ads" },
+        { label: "Influencer Budget", id: "bud-influencers" },
+        { label: "Production Budget", id: "bud-production" },
+        { label: "Events & Activations Budget", id: "bud-events" },
+        { label: "Research & Analytics Budget", id: "bud-research" }
+      ]
+    },
+    {
+      title: "13. KPIs",
+      fields: [
+        { label: "Awareness Indicators", id: "kpi-awareness" },
+        { label: "Engagement Indicators", id: "kpi-engagement" },
+        { label: "Lead Generation Indicators", id: "kpi-lead" },
+        { label: "Conversion Indicators", id: "kpi-conversion" },
+        { label: "Retention Indicators", id: "kpi-retention" },
+        { label: "ROI Indicators", id: "kpi-roi" }
+      ]
+    },
+    {
+      title: "14. Implementation Timeline",
+      fields: [
+        { label: "Month 1 Schedule", id: "time-m1" },
+        { label: "Month 2 Schedule", id: "time-m2" },
+        { label: "Month 3 Schedule", id: "time-m3" },
+        { label: "Months 4-6 Schedule", id: "time-m4" }
+      ]
+    },
+    {
+      title: "15. Recommendations",
+      fields: [
+        { label: "Quick Wins", id: "rec-quick" },
+        { label: "Medium-Term Actions", id: "rec-medium" },
+        { label: "Long-Term Actions", id: "rec-long" }
+      ]
+    }
+  ];
 
-  let sec2HTML = `
-    <div class="print-section">
-      <h2>2. Audience Insights</h2>
-      <div class="print-cards-grid">
-        ${personasHTML}
-      </div>
-    </div>
-  `;
-  printContainer.innerHTML += sec2HTML;
-
-  // Section 3: Competitor Analysis
-  let competitorsHTML = '';
-  if (state.competitors.length > 0) {
-    state.competitors.forEach(c => {
-      competitorsHTML += `
-        <div class="print-item-card">
-          <div class="print-item-title">${c.name || 'Unnamed Competitor'} (Est. Market Share: ${c.share || 'Not Specified'})</div>
+  // Compile output HTML
+  sectionsConfig.forEach(sec => {
+    let secHTML = `<div class="print-section"><h2>${sec.title}</h2>`;
+    
+    if (sec.fields) {
+      sec.fields.forEach(f => {
+        secHTML += `
           <div class="print-field">
-            <div class="print-label">Market Positioning & Focus</div>
-            <div class="print-value">${getCleanVal(c.positioning)}</div>
+            <div class="print-label">${f.label}</div>
+            <div class="print-value">${getCleanVal(state.staticFields[f.id])}</div>
           </div>
-          <div class="print-field">
-            <div class="print-label">Key Strengths</div>
-            <div class="print-value">${getCleanVal(c.strengths)}</div>
-          </div>
-          <div class="print-field">
-            <div class="print-label">Key Weaknesses</div>
-            <div class="print-value">${getCleanVal(c.weaknesses)}</div>
-          </div>
-        </div>
-      `;
-    });
-  } else {
-    competitorsHTML = '<p><em>No competitor analyses documented.</em></p>';
-  }
+        `;
+      });
+    }
 
-  let sec3HTML = `
-    <div class="print-section">
-      <h2>3. Competitor Analysis</h2>
-      <div class="print-cards-grid">
-        ${competitorsHTML}
-      </div>
-    </div>
-  `;
-  printContainer.innerHTML += sec3HTML;
+    if (sec.customHTML) {
+      secHTML += sec.customHTML;
+    }
 
-  // Section 4: Objectives
-  let goalsRowsHTML = '';
-  if (state.goals.length > 0) {
-    state.goals.forEach((g, index) => {
-      goalsRowsHTML += `
-        <tr>
-          <td><strong>Objective #${index+1}</strong></td>
-          <td>${getCleanVal(g.description)}</td>
-          <td>${getCleanVal(g.kpi)}</td>
-          <td>${g.date ? new Date(g.date).toLocaleDateString() : '<em>Not specified</em>'}</td>
-        </tr>
-      `;
-    });
-  } else {
-    goalsRowsHTML = `<tr><td colspan="4" style="text-align: center;">No SMART objectives specified.</td></tr>`;
-  }
+    if (sec.customRender) {
+      secHTML += sec.customRender();
+    }
 
-  let sec4HTML = `
-    <div class="print-section">
-      <h2>4. SMART Objectives</h2>
-      <table class="print-table">
-        <thead>
-          <tr>
-            <th style="width: 15%">Objective</th>
-            <th style="width: 45%">Goal Description</th>
-            <th style="width: 25%">KPI Target</th>
-            <th style="width: 15%">Target Date</th>
-          </tr>
-        </thead>
-        <tbody>
-          ${goalsRowsHTML}
-        </tbody>
-      </table>
-    </div>
-  `;
-  printContainer.innerHTML += sec4HTML;
-
-  // Section 5: Positioning & Messaging
-  let sec5HTML = `
-    <div class="print-section">
-      <h2>5. Positioning & Key Messaging</h2>
-      <div class="print-field">
-        <div class="print-label">Core Brand Tagline</div>
-        <div class="print-value">${getCleanVal(state.staticFields['brand-tagline'])}</div>
-      </div>
-      <div class="print-field">
-        <div class="print-label">Elevator Pitch</div>
-        <div class="print-value">${getCleanVal(state.staticFields['elevator-pitch'])}</div>
-      </div>
-      
-      <h3 style="color: #222; font-size: 13pt; margin: 15px 0 10px 0;">Brand Pillars</h3>
-      <div class="print-cards-grid" style="grid-template-columns: repeat(3, 1fr); gap: 15px;">
-        <div class="print-item-card" style="margin-bottom: 0;">
-          <div class="print-item-title" style="font-size: 11pt; border-bottom-color: #6366f1;">Pillar 1: ${getCleanVal(state.staticFields['pillar1-title'])}</div>
-          <div class="print-value" style="font-size: 9.5pt;">${getCleanVal(state.staticFields['pillar1-desc'])}</div>
-        </div>
-        <div class="print-item-card" style="margin-bottom: 0;">
-          <div class="print-item-title" style="font-size: 11pt; border-bottom-color: #a855f7;">Pillar 2: ${getCleanVal(state.staticFields['pillar2-title'])}</div>
-          <div class="print-value" style="font-size: 9.5pt;">${getCleanVal(state.staticFields['pillar2-desc'])}</div>
-        </div>
-        <div class="print-item-card" style="margin-bottom: 0;">
-          <div class="print-item-title" style="font-size: 11pt; border-bottom-color: #06b6d4;">Pillar 3: ${getCleanVal(state.staticFields['pillar3-title'])}</div>
-          <div class="print-value" style="font-size: 9.5pt;">${getCleanVal(state.staticFields['pillar3-desc'])}</div>
-        </div>
-      </div>
-    </div>
-  `;
-  printContainer.innerHTML += sec5HTML;
-
-  // Section 6: Marketing Channels & Strategies
-  let sec6HTML = `
-    <div class="print-section">
-      <h2>6. Marketing Strategy & Distribution Channels</h2>
-      <div class="print-field">
-        <div class="print-label">Content Strategy</div>
-        <div class="print-value">${getCleanVal(state.staticFields['strategy-content'])}</div>
-      </div>
-      <div class="print-field">
-        <div class="print-label">Social Media</div>
-        <div class="print-value">${getCleanVal(state.staticFields['strategy-social'])}</div>
-      </div>
-      <div class="print-field">
-        <div class="print-label">Paid Media & Search</div>
-        <div class="print-value">${getCleanVal(state.staticFields['strategy-media'])}</div>
-      </div>
-      <div class="print-field">
-        <div class="print-label">Influencers & Partnerships</div>
-        <div class="print-value">${getCleanVal(state.staticFields['strategy-influencers'])}</div>
-      </div>
-      <div class="print-field">
-        <div class="print-label">Brand Activations & Offline Initiatives</div>
-        <div class="print-value">${getCleanVal(state.staticFields['strategy-activations'])}</div>
-      </div>
-    </div>
-  `;
-  printContainer.innerHTML += sec6HTML;
-
-  // Section 7: KPIs & Timeline
-  let milestonesRowsHTML = '';
-  if (state.milestones.length > 0) {
-    // Sort milestones by date for print
-    const sortedMilestones = [...state.milestones].sort((a, b) => new Date(a.date) - new Date(b.date));
-    sortedMilestones.forEach(m => {
-      milestonesRowsHTML += `
-        <tr>
-          <td>${m.date ? new Date(m.date).toLocaleDateString() : '<em>Not specified</em>'}</td>
-          <td>${getCleanVal(m.title)}</td>
-          <td>${getCleanVal(m.owner)}</td>
-          <td><span style="font-weight: 600;">${m.status}</span></td>
-        </tr>
-      `;
-    });
-  } else {
-    milestonesRowsHTML = `<tr><td colspan="4" style="text-align: center;">No roadmap milestones planned.</td></tr>`;
-  }
-
-  let sec7HTML = `
-    <div class="print-section">
-      <h2>7. Key Metrics, Budgets & Implementation Roadmap</h2>
-      <div class="print-field">
-        <div class="print-label">Primary KPIs & Targets</div>
-        <div class="print-value">${getCleanVal(state.staticFields['primary-kpis'])}</div>
-      </div>
-      <div class="print-field">
-        <div class="print-label">High-level Budget Allocations</div>
-        <div class="print-value">${getCleanVal(state.staticFields['budget-allocation'])}</div>
-      </div>
-      
-      <h3 style="color: #222; font-size: 13pt; margin: 15px 0 10px 0;">Implementation Roadmap</h3>
-      <table class="print-table">
-        <thead>
-          <tr>
-            <th style="width: 15%">Date</th>
-            <th style="width: 50%">Initiative / Task</th>
-            <th style="width: 20%">Lead Owner</th>
-            <th style="width: 15%">Status</th>
-          </tr>
-        </thead>
-        <tbody>
-          ${milestonesRowsHTML}
-        </tbody>
-      </table>
-    </div>
-  `;
-  printContainer.innerHTML += sec7HTML;
+    secHTML += `</div>`;
+    printContainer.innerHTML += secHTML;
+  });
 }
 
-// Window resizing adjustments for auto-grow textareas
+// Window resizing height fits for textareas
 window.addEventListener('resize', adjustTextareaHeights);

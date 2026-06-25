@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>STRATEGIZE // Professional Marketing Strategy Planner</title>
+  <title>STRATEGIZE // 15-Section Marketing Strategy Workspace</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -31,72 +31,79 @@
       </div>
 
       <nav class="nav-links">
-        <button class="nav-btn active" data-section="overview">
-          <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <rect x="3" y="3" width="7" height="9" rx="1"/>
-            <rect x="14" y="3" width="7" height="5" rx="1"/>
-            <rect x="14" y="12" width="7" height="9" rx="1"/>
-            <rect x="3" y="16" width="7" height="5" rx="1"/>
-          </svg>
-          <span class="nav-text">1. Market Overview</span>
+        <button class="nav-btn active" data-section="overview" title="1. Business Overview">
+          <span class="nav-text">1. Business Overview</span>
           <span class="indicator-badge" id="badge-overview"></span>
         </button>
 
-        <button class="nav-btn" data-section="audience">
-          <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
-            <circle cx="9" cy="7" r="4"/>
-            <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
-            <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
-          </svg>
-          <span class="nav-text">2. Audience Insights</span>
+        <button class="nav-btn" data-section="situation" title="2. Situation Analysis">
+          <span class="nav-text">2. Situation Analysis</span>
+          <span class="indicator-badge" id="badge-situation"></span>
+        </button>
+
+        <button class="nav-btn" data-section="audience" title="3. Target Audience">
+          <span class="nav-text">3. Target Audience</span>
           <span class="indicator-badge" id="badge-audience"></span>
         </button>
 
-        <button class="nav-btn" data-section="competitors">
-          <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <path d="M18 18.72a6 6 0 0 0 1-3.72V9a7 7 0 0 0-14 0v6a6 6 0 0 0 1 3.72"/>
-            <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/>
-          </svg>
-          <span class="nav-text">3. Competitor Analysis</span>
-          <span class="indicator-badge" id="badge-competitors"></span>
+        <button class="nav-btn" data-section="personas" title="4. Buyer Personas">
+          <span class="nav-text">4. Buyer Personas</span>
+          <span class="indicator-badge" id="badge-personas"></span>
         </button>
 
-        <button class="nav-btn" data-section="objectives">
-          <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <circle cx="12" cy="12" r="10"/>
-            <circle cx="12" cy="12" r="6"/>
-            <circle cx="12" cy="12" r="2"/>
-          </svg>
-          <span class="nav-text">4. Objectives</span>
+        <button class="nav-btn" data-section="objectives" title="5. Marketing Objectives">
+          <span class="nav-text">5. Objectives</span>
           <span class="indicator-badge" id="badge-objectives"></span>
         </button>
 
-        <button class="nav-btn" data-section="positioning">
-          <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/>
-          </svg>
-          <span class="nav-text">5. Positioning & Messaging</span>
+        <button class="nav-btn" data-section="positioning" title="6. Brand Positioning">
+          <span class="nav-text">6. Brand Positioning</span>
           <span class="indicator-badge" id="badge-positioning"></span>
         </button>
 
-        <button class="nav-btn" data-section="strategy">
-          <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.57-8.38l5.67-5.67"/>
-          </svg>
-          <span class="nav-text">6. Marketing Strategy</span>
-          <span class="indicator-badge" id="badge-strategy"></span>
+        <button class="nav-btn" data-section="valprop" title="7. Value Proposition">
+          <span class="nav-text">7. Value Proposition</span>
+          <span class="indicator-badge" id="badge-valprop"></span>
         </button>
 
-        <button class="nav-btn" data-section="kpis">
-          <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
-            <line x1="16" y1="2" x2="16" y2="6"/>
-            <line x1="8" y1="2" x2="8" y2="6"/>
-            <line x1="3" y1="10" x2="21" y2="10"/>
-          </svg>
-          <span class="nav-text">7. KPIs & Timeline</span>
+        <button class="nav-btn" data-section="marketingmix" title="8. Marketing Mix (7Ps)">
+          <span class="nav-text">8. Marketing Mix (7Ps)</span>
+          <span class="indicator-badge" id="badge-marketingmix"></span>
+        </button>
+
+        <button class="nav-btn" data-section="contentstrategy" title="9. Content Strategy">
+          <span class="nav-text">9. Content Strategy</span>
+          <span class="indicator-badge" id="badge-contentstrategy"></span>
+        </button>
+
+        <button class="nav-btn" data-section="channelstrategy" title="10. Channel Strategy">
+          <span class="nav-text">10. Channel Strategy</span>
+          <span class="indicator-badge" id="badge-channelstrategy"></span>
+        </button>
+
+        <button class="nav-btn" data-section="campaignstrategy" title="11. Campaign Strategy">
+          <span class="nav-text">11. Campaign Strategy</span>
+          <span class="indicator-badge" id="badge-campaignstrategy"></span>
+        </button>
+
+        <button class="nav-btn" data-section="budget" title="12. Budget Allocation">
+          <span class="nav-text">12. Budget Allocation</span>
+          <span class="indicator-badge" id="badge-budget"></span>
+        </button>
+
+        <button class="nav-btn" data-section="kpis" title="13. KPIs">
+          <span class="nav-text">13. KPIs</span>
           <span class="indicator-badge" id="badge-kpis"></span>
+        </button>
+
+        <button class="nav-btn" data-section="timeline" title="14. Timeline">
+          <span class="nav-text">14. Timeline</span>
+          <span class="indicator-badge" id="badge-timeline"></span>
+        </button>
+
+        <button class="nav-btn" data-section="recommendations" title="15. Recommendations">
+          <span class="nav-text">15. Recommendations</span>
+          <span class="indicator-badge" id="badge-recommendations"></span>
         </button>
       </nav>
 
@@ -111,7 +118,7 @@
       <header class="top-bar">
         <div class="title-section">
           <h1>Marketing Strategy Workspace</h1>
-          <p class="subtitle">Draft, analyze, and refine your marketing initiatives</p>
+          <p class="subtitle">15-Section Professional Framework Checklist</p>
         </div>
         <div class="actions-group">
           <button class="btn btn-secondary" id="btn-print" title="Print strategy or save as PDF">
@@ -153,43 +160,79 @@
       <!-- Strategy Content Modules -->
       <div class="content-panel">
         
-        <!-- SECTION 1: BUSINESS & MARKET OVERVIEW -->
+        <!-- SECTION 1: BUSINESS OVERVIEW -->
         <section id="section-overview" class="strategy-section active">
           <div class="section-header-block">
             <span class="step-num">MODULE 01</span>
-            <h2>Business & Market Overview</h2>
-            <p class="section-desc">Define your business profile, target market size, unique value proposition, and competitive environment.</p>
+            <h2>Business Overview</h2>
+            <p class="section-desc">Outline core operational information and basic profiles of your business.</p>
           </div>
 
           <div class="form-grid">
+            <div class="form-group">
+              <label for="company-name">Company Name</label>
+              <input type="text" id="company-name" placeholder="Enter company name..." data-save>
+            </div>
+
+            <div class="form-group">
+              <label for="company-industry">Industry</label>
+              <input type="text" id="company-industry" placeholder="e.g., SaaS, E-commerce, Healthcare..." data-save>
+            </div>
+
             <div class="form-group full-width">
-              <label for="company-name">Company / Project Name</label>
-              <input type="text" id="company-name" placeholder="Enter company or brand name..." data-save>
+              <label for="company-products">Products / Services Offered</label>
+              <textarea id="company-products" placeholder="- List core offerings:&#10;- Specific tiers or variations:&#10;- Target solution value:" data-save></textarea>
+            </div>
+
+            <div class="form-group full-width">
+              <label for="company-usp">Unique Selling Proposition (USP)</label>
+              <textarea id="company-usp" placeholder="- What makes your brand unique:&#10;- Primary differentiator over key competitors:&#10;- The core promise to customers:" data-save></textarea>
             </div>
 
             <div class="form-group">
-              <label for="market-description">Market & Industry Description</label>
-              <textarea id="market-description" placeholder="Describe the market size, industry trends, and key dynamics..." data-save></textarea>
+              <label for="company-position">Current Market Position</label>
+              <textarea id="company-position" placeholder="- Market share estimate:&#10;- Brand perception (e.g., Premium, budget-friendly):&#10;- Current market niche:" data-save></textarea>
             </div>
 
             <div class="form-group">
-              <label for="value-proposition">Unique Value Proposition (UVP)</label>
-              <textarea id="value-proposition" placeholder="What makes your product/service unique? Why should customers choose you?" data-save></textarea>
+              <label for="company-goals">Business Goals</label>
+              <textarea id="company-goals" placeholder="- Short-term milestones (next 6 months):&#10;- Long-term vision (1-3 years):&#10;- Financial/growth objectives:" data-save></textarea>
             </div>
+          </div>
+        </section>
+
+        <!-- SECTION 2: SITUATION ANALYSIS -->
+        <section id="section-situation" class="strategy-section">
+          <div class="section-header-block">
+            <span class="step-num">MODULE 02</span>
+            <h2>Situation Analysis</h2>
+            <p class="section-desc">Analyze external market conditions, target competitors, and list internal SWOT profiles.</p>
+          </div>
+
+          <div class="form-group full-width">
+            <label for="situation-market">Market Analysis</label>
+            <p class="field-desc">Analyze size, trends, customer behaviors, and challenges.</p>
+            <textarea id="situation-market" placeholder="- Industry size and growth:&#10;- Current market trends:&#10;- Customer behavior trends:&#10;- Market opportunities:&#10;- Market challenges:" data-save></textarea>
           </div>
 
           <div class="divider"></div>
 
-          <h3>SWOT Analysis Matrix</h3>
-          <p class="section-desc mb-4">Analyze internal capabilities and external market conditions.</p>
-          
+          <div class="form-group full-width">
+            <label for="situation-competitor">Competitor Analysis</label>
+            <p class="field-desc">Review competitor strategies, marketing channels, and identify market opportunities.</p>
+            <textarea id="situation-competitor" placeholder="- Main competitors:&#10;- Competitor strengths:&#10;- Competitor weaknesses:&#10;- Competitor positioning:&#10;- Competitor marketing activities:&#10;- Market gaps:" data-save></textarea>
+          </div>
+
+          <div class="divider"></div>
+
+          <h3>SWOT Analysis</h3>
           <div class="swot-grid">
             <div class="swot-box swot-strengths">
               <div class="swot-title">
                 <span class="swot-letter">S</span>
                 <span class="swot-label">Strengths</span>
               </div>
-              <textarea id="swot-s" placeholder="Internal advantages, proprietary assets, team skills..." data-save></textarea>
+              <textarea id="swot-s" placeholder="- Internal advantages:&#10;- Resources:&#10;- Capabilities:" data-save></textarea>
             </div>
 
             <div class="swot-box swot-weaknesses">
@@ -197,7 +240,7 @@
                 <span class="swot-letter">W</span>
                 <span class="swot-label">Weaknesses</span>
               </div>
-              <textarea id="swot-w" placeholder="Internal limitations, resource gaps, areas of improvement..." data-save></textarea>
+              <textarea id="swot-w" placeholder="- Internal limitations:&#10;- Resource gaps:&#10;- Brand challenges:" data-save></textarea>
             </div>
 
             <div class="swot-box swot-opportunities">
@@ -205,7 +248,7 @@
                 <span class="swot-letter">O</span>
                 <span class="swot-label">Opportunities</span>
               </div>
-              <textarea id="swot-o" placeholder="External trends, emerging demands, niche markets..." data-save></textarea>
+              <textarea id="swot-o" placeholder="- Market trends:&#10;- Untapped audiences:&#10;- New channels:" data-save></textarea>
             </div>
 
             <div class="swot-box swot-threats">
@@ -213,21 +256,52 @@
                 <span class="swot-letter">T</span>
                 <span class="swot-label">Threats</span>
               </div>
-              <textarea id="swot-t" placeholder="Competitor actions, regulatory shifts, economic pressures..." data-save></textarea>
+              <textarea id="swot-t" placeholder="- Competition:&#10;- Economic factors:&#10;- Industry risks:" data-save></textarea>
             </div>
           </div>
         </section>
 
-        <!-- SECTION 2: AUDIENCE INSIGHTS -->
+        <!-- SECTION 3: TARGET AUDIENCE -->
         <section id="section-audience" class="strategy-section">
           <div class="section-header-block">
-            <span class="step-num">MODULE 02</span>
-            <h2>Audience Insights</h2>
-            <p class="section-desc">Create target client personas to understand their needs, behaviors, and challenges.</p>
+            <span class="step-num">MODULE 03</span>
+            <h2>Target Audience</h2>
+            <p class="section-desc">Map out the demographic, psychographic, and journey details of your target buyers.</p>
+          </div>
+
+          <div class="form-grid">
+            <div class="form-group">
+              <label for="audience-primary">Primary Audience</label>
+              <textarea id="audience-primary" placeholder="- Age:&#10;- Gender:&#10;- Location:&#10;- Income level:&#10;- Education level:&#10;- Occupation:" data-save></textarea>
+            </div>
+
+            <div class="form-group">
+              <label for="audience-psychographics">Psychographics</label>
+              <textarea id="audience-psychographics" placeholder="- Interests:&#10;- Lifestyle:&#10;- Values:&#10;- Attitudes:&#10;- Motivations:" data-save></textarea>
+            </div>
+
+            <div class="form-group full-width">
+              <label for="audience-painpoints">Pain Points</label>
+              <textarea id="audience-painpoints" placeholder="- Problems they face:&#10;- Unmet needs:&#10;- Frustrations:" data-save></textarea>
+            </div>
+
+            <div class="form-group full-width">
+              <label for="audience-journey">Customer Journey Map</label>
+              <textarea id="audience-journey" placeholder="- Awareness stage:&#10;- Consideration stage:&#10;- Purchase stage:&#10;- Retention stage:" data-save></textarea>
+            </div>
+          </div>
+        </section>
+
+        <!-- SECTION 4: BUYER PERSONAS -->
+        <section id="section-personas" class="strategy-section">
+          <div class="section-header-block">
+            <span class="step-num">MODULE 04</span>
+            <h2>Buyer Personas</h2>
+            <p class="section-desc">Create representative personas of your target buyers containing goals and buying triggers.</p>
           </div>
 
           <div class="dynamic-group-header">
-            <h3>Ideal Customer Profiles (ICPs) & Personas</h3>
+            <h3>Persona Models</h3>
             <button class="btn btn-primary btn-sm" id="btn-add-persona">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                 <line x1="12" y1="5" x2="12" y2="19"/>
@@ -238,234 +312,379 @@
           </div>
 
           <div id="personas-container" class="cards-grid">
-            <!-- Dynamic Persona Cards Inject Here -->
+            <!-- Dynamic Personas Inject Here -->
           </div>
         </section>
 
-        <!-- SECTION 3: COMPETITOR ANALYSIS -->
-        <section id="section-competitors" class="strategy-section">
-          <div class="section-header-block">
-            <span class="step-num">MODULE 03</span>
-            <h2>Competitor Analysis</h2>
-            <p class="section-desc">Identify core competitors, evaluate their strategies, market positioning, strengths, and weaknesses.</p>
-          </div>
-
-          <div class="dynamic-group-header">
-            <h3>Competitor Matrix</h3>
-            <button class="btn btn-primary btn-sm" id="btn-add-competitor">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <line x1="12" y1="5" x2="12" y2="19"/>
-                <line x1="5" y1="12" x2="19" y2="12"/>
-              </svg>
-              Add Competitor
-            </button>
-          </div>
-
-          <div id="competitors-container" class="cards-grid">
-            <!-- Dynamic Competitor Cards Inject Here -->
-          </div>
-        </section>
-
-        <!-- SECTION 4: OBJECTIVES -->
+        <!-- SECTION 5: MARKETING OBJECTIVES -->
         <section id="section-objectives" class="strategy-section">
           <div class="section-header-block">
-            <span class="step-num">MODULE 04</span>
-            <h2>Objectives & Goals</h2>
-            <p class="section-desc">Establish clear, measurable, and action-oriented SMART objectives to guide marketing success.</p>
+            <span class="step-num">MODULE 05</span>
+            <h2>Marketing Objectives</h2>
+            <p class="section-desc">Formulate target milestones across brand, leads, sales, and retention. Make them SMART.</p>
           </div>
 
-          <div class="dynamic-group-header">
-            <h3>SMART Marketing Objectives</h3>
-            <button class="btn btn-primary btn-sm" id="btn-add-goal">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <line x1="12" y1="5" x2="12" y2="19"/>
-                <line x1="5" y1="12" x2="19" y2="12"/>
-              </svg>
-              Add Goal
-            </button>
-          </div>
+          <div class="form-grid">
+            <div class="form-group">
+              <label for="obj-brand">Brand Awareness</label>
+              <textarea id="obj-brand" placeholder="- Increase awareness by ___%&#10;- Reach ___ people&#10;- Increase followers by ___%" data-save></textarea>
+            </div>
 
-          <div id="goals-container" class="goals-list-wrapper">
-            <!-- Dynamic Goal Items Inject Here -->
+            <div class="form-group">
+              <label for="obj-leads">Lead Generation</label>
+              <textarea id="obj-leads" placeholder="- Generate ___ leads&#10;- Increase inquiries by ___%" data-save></textarea>
+            </div>
+
+            <div class="form-group">
+              <label for="obj-sales">Sales</label>
+              <textarea id="obj-sales" placeholder="- Increase sales by ___%&#10;- Increase conversions by ___%" data-save></textarea>
+            </div>
+
+            <div class="form-group">
+              <label for="obj-retention">Customer Retention</label>
+              <textarea id="obj-retention" placeholder="- Increase repeat purchases:&#10;- Increase customer loyalty:&#10;- Improve retention rate:" data-save></textarea>
+            </div>
+
+            <div class="form-group full-width">
+              <label for="obj-smart-helper">SMART Goals Specification Checklist</label>
+              <p class="field-desc">Combine the objectives above into consolidated, SMART-compliant strategic goals.</p>
+              <textarea id="obj-smart-helper" placeholder="- Specific (Clear, unambiguous objectives):&#10;- Measurable (Metric-driven indicators):&#10;- Achievable (Realistic and attainable):&#10;- Relevant (Aligned with business model):&#10;- Time-bound (Strict target dates):" data-save></textarea>
+            </div>
           </div>
         </section>
 
-        <!-- SECTION 5: POSITIONING & KEY MESSAGING -->
+        <!-- SECTION 6: BRAND POSITIONING -->
         <section id="section-positioning" class="strategy-section">
           <div class="section-header-block">
-            <span class="step-num">MODULE 05</span>
-            <h2>Positioning & Key Messaging</h2>
-            <p class="section-desc">Shape how your brand is perceived in the market and formulate your core messages.</p>
+            <span class="step-num">MODULE 06</span>
+            <h2>Brand Positioning</h2>
+            <p class="section-desc">Define your brand identity, messaging narrative, and core tone styles.</p>
           </div>
 
           <div class="form-grid">
             <div class="form-group full-width">
-              <label for="brand-tagline">Core Brand Tagline</label>
-              <input type="text" id="brand-tagline" placeholder="A short, memorable phrase summarizing your value proposition..." data-save>
+              <label for="pos-statement">Positioning Statement</label>
+              <textarea id="pos-statement" placeholder="- Target audience:&#10;- Category:&#10;- Key benefit:&#10;- Differentiator:" data-save></textarea>
             </div>
 
-            <div class="form-group full-width">
-              <label for="elevator-pitch">Elevator Pitch (30-Second Brand Narrative)</label>
-              <textarea id="elevator-pitch" class="short-textarea" placeholder="For [target audience] who [need/pain point], [brand name] is a [category] that [unique solution/benefit]. Unlike [competitors], we [unique difference]..." data-save></textarea>
-            </div>
-          </div>
-
-          <div class="divider"></div>
-
-          <h3>Core Messaging Pillars</h3>
-          <p class="section-desc mb-4">Establish the 3 fundamental themes that your brand communication will repeatedly focus on.</p>
-
-          <div class="pillars-grid">
-            <div class="pillar-card">
-              <div class="pillar-badge">PILLAR 01</div>
-              <div class="form-group">
-                <label for="pillar1-title">Theme / Focus Area</label>
-                <input type="text" id="pillar1-title" placeholder="e.g., Uncompromising Quality, Simplicity" data-save>
-              </div>
-              <div class="form-group">
-                <label for="pillar1-desc">Supporting Proof Points</label>
-                <textarea id="pillar1-desc" class="mini-textarea" placeholder="How do you prove this? Certifications, features, statistics..." data-save></textarea>
-              </div>
+            <div class="form-group">
+              <label for="pos-personality">Brand Personality</label>
+              <textarea id="pos-personality" placeholder="- Brand traits:&#10;- Brand values:&#10;- Brand promise:" data-save></textarea>
             </div>
 
-            <div class="pillar-card">
-              <div class="pillar-badge">PILLAR 02</div>
-              <div class="form-group">
-                <label for="pillar2-title">Theme / Focus Area</label>
-                <input type="text" id="pillar2-title" placeholder="e.g., Sustainability, Customer Centricity" data-save>
-              </div>
-              <div class="form-group">
-                <label for="pillar2-desc">Supporting Proof Points</label>
-                <textarea id="pillar2-desc" class="mini-textarea" placeholder="How do you prove this?..." data-save></textarea>
-              </div>
-            </div>
-
-            <div class="pillar-card">
-              <div class="pillar-badge">PILLAR 03</div>
-              <div class="form-group">
-                <label for="pillar3-title">Theme / Focus Area</label>
-                <input type="text" id="pillar3-title" placeholder="e.g., Technology Innovation" data-save>
-              </div>
-              <div class="form-group">
-                <label for="pillar3-desc">Supporting Proof Points</label>
-                <textarea id="pillar3-desc" class="mini-textarea" placeholder="How do you prove this?..." data-save></textarea>
-              </div>
+            <div class="form-group">
+              <label for="pos-tone">Tone of Voice Guidelines</label>
+              <textarea id="pos-tone" placeholder="- Core tone guidelines (e.g. Professional, Friendly, Luxury, Playful, Authoritative, Inspirational):&#10;- Words we use:&#10;- Words we avoid:" data-save></textarea>
             </div>
           </div>
         </section>
 
-        <!-- SECTION 6: MARKETING STRATEGY -->
-        <section id="section-strategy" class="strategy-section">
-          <div class="section-header-block">
-            <span class="step-num">MODULE 06</span>
-            <h2>Marketing Strategy</h2>
-            <p class="section-desc">Outline how you plan to reach your audience across key channels and marketing disciplines.</p>
-          </div>
-
-          <div class="channels-grid">
-            <div class="channel-card">
-              <div class="channel-header">
-                <svg class="channel-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                  <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
-                  <polyline points="14 2 14 8 20 8"/>
-                  <line x1="16" y1="13" x2="8" y2="13"/>
-                  <line x1="16" y1="17" x2="8" y2="17"/>
-                  <polyline points="10 9 9 9 8 9"/>
-                </svg>
-                <h4>Content Strategy</h4>
-              </div>
-              <p class="channel-desc">Blog posts, whitepapers, case studies, videos, and newsletters that educate and attract.</p>
-              <textarea id="strategy-content" placeholder="Describe key content themes, formats, resources needed, and publishing frequency..." data-save></textarea>
-            </div>
-
-            <div class="channel-card">
-              <div class="channel-header">
-                <svg class="channel-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                  <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/>
-                </svg>
-                <h4>Social Media</h4>
-              </div>
-              <p class="channel-desc">Organic distribution, community engagement, brand voice, and platform prioritization.</p>
-              <textarea id="strategy-social" placeholder="Which networks (LinkedIn, YouTube, Instagram)? How will you build and engage your followers?..." data-save></textarea>
-            </div>
-
-            <div class="channel-card">
-              <div class="channel-header">
-                <svg class="channel-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                  <rect x="2" y="3" width="20" height="14" rx="2" ry="2"/>
-                  <line x1="8" y1="21" x2="16" y2="21"/>
-                  <line x1="12" y1="17" x2="12" y2="21"/>
-                </svg>
-                <h4>Paid Media & Search</h4>
-              </div>
-              <p class="channel-desc">Search engine ads (PPC), paid social ads, programmatic advertising, and retargeting campaigns.</p>
-              <textarea id="strategy-media" placeholder="Budget allocation, target keywords, high-level campaign funnels, and ad concepts..." data-save></textarea>
-            </div>
-
-            <div class="channel-card">
-              <div class="channel-header">
-                <svg class="channel-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                  <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
-                  <circle cx="9" cy="7" r="4"/>
-                  <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
-                  <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
-                </svg>
-                <h4>Influencers & Partnerships</h4>
-              </div>
-              <p class="channel-desc">Collaborating with creators, affiliates, and industry leaders to leverage their trust.</p>
-              <textarea id="strategy-influencers" placeholder="Who are potential partners? What kind of integration (reviews, co-marketing, affiliate)?..." data-save></textarea>
-            </div>
-
-            <div class="channel-card full-width">
-              <div class="channel-header">
-                <svg class="channel-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                  <polygon points="12 2 2 7 12 12 22 7 12 2"/>
-                  <polyline points="2 17 12 22 22 17"/>
-                  <polyline points="2 12 12 17 22 12"/>
-                </svg>
-                <h4>Brand Activations & Offline Initiatives</h4>
-              </div>
-              <p class="channel-desc">Product launches, webinars, trade shows, guerrilla marketing campaigns, and interactive digital experiences.</p>
-              <textarea id="strategy-activations" placeholder="Specify major launch campaigns, virtual summits, physical events, or experimental growth hacks..." data-save></textarea>
-            </div>
-          </div>
-        </section>
-
-        <!-- SECTION 7: KPIS & TIMELINE -->
-        <section id="section-kpis" class="strategy-section">
+        <!-- SECTION 7: VALUE PROPOSITION -->
+        <section id="section-valprop" class="strategy-section">
           <div class="section-header-block">
             <span class="step-num">MODULE 07</span>
-            <h2>KPIs & Implementation Timeline</h2>
-            <p class="section-desc">Track key performance metrics and establish a detailed roadmap of milestones and actions.</p>
+            <h2>Value Proposition</h2>
+            <p class="section-desc">Deconstruct the functional, emotional, and economic value you deliver.</p>
+          </div>
+
+          <div class="form-grid">
+            <div class="form-group full-width">
+              <label for="vp-functional">Functional Benefits</label>
+              <textarea id="vp-functional" placeholder="- What problem does it solve?&#10;- What practical value does it provide?" data-save></textarea>
+            </div>
+
+            <div class="form-group">
+              <label for="vp-emotional">Emotional Benefits</label>
+              <textarea id="vp-emotional" placeholder="- How does it make customers feel? (e.g., Confident, secure, accomplished):" data-save></textarea>
+            </div>
+
+            <div class="form-group">
+              <label for="vp-economic">Economic Benefits</label>
+              <textarea id="vp-economic" placeholder="- Time savings:&#10;- Cost savings:&#10;- Convenience/efficiency gains:" data-save></textarea>
+            </div>
+          </div>
+        </section>
+
+        <!-- SECTION 8: MARKETING MIX (7Ps) -->
+        <section id="section-marketingmix" class="strategy-section">
+          <div class="section-header-block">
+            <span class="step-num">MODULE 08</span>
+            <h2>Marketing Mix (7Ps)</h2>
+            <p class="section-desc">Document the comprehensive 7Ps framework governing your tactical positioning.</p>
           </div>
 
           <div class="form-grid">
             <div class="form-group">
-              <label for="primary-kpis">Primary KPIs & Target Metrics</label>
-              <textarea id="primary-kpis" placeholder="e.g., - Customer Acquisition Cost (CAC) under $50&#10;- 5,000 monthly organic signups by Q4&#10;- Social media engagement rate of 4.5%..." data-save></textarea>
+              <label for="mix-product">1. Product</label>
+              <textarea id="mix-product" class="mini-textarea" placeholder="- Core offering:&#10;- Features:&#10;- Benefits:&#10;- Packaging:" data-save></textarea>
             </div>
 
             <div class="form-group">
-              <label for="budget-allocation">High-Level Budget Allocation</label>
-              <textarea id="budget-allocation" placeholder="e.g., - Content Creation: 25%&#10;- Paid Social / Search Ads: 40%&#10;- Tools & Subscriptions: 15%&#10;- Events & Activations: 20%..." data-save></textarea>
+              <label for="mix-price">2. Price</label>
+              <textarea id="mix-price" class="mini-textarea" placeholder="- Pricing strategy:&#10;- Promotions:&#10;- Discounts:" data-save></textarea>
+            </div>
+
+            <div class="form-group">
+              <label for="mix-place">3. Place</label>
+              <textarea id="mix-place" class="mini-textarea" placeholder="- Sales channels:&#10;- Distribution channels:&#10;- Website/app presence:" data-save></textarea>
+            </div>
+
+            <div class="form-group">
+              <label for="mix-promotion">4. Promotion</label>
+              <textarea id="mix-promotion" class="mini-textarea" placeholder="- Advertising:&#10;- Social media:&#10;- PR:&#10;- Influencers:&#10;- Events:" data-save></textarea>
+            </div>
+
+            <div class="form-group">
+              <label for="mix-people">5. People</label>
+              <textarea id="mix-people" class="mini-textarea" placeholder="- Staff experience:&#10;- Customer service:" data-save></textarea>
+            </div>
+
+            <div class="form-group">
+              <label for="mix-process">6. Process</label>
+              <textarea id="mix-process" class="mini-textarea" placeholder="- Customer journey:&#10;- Purchase process:" data-save></textarea>
+            </div>
+
+            <div class="form-group full-width">
+              <label for="mix-physical">7. Physical Evidence</label>
+              <textarea id="mix-physical" class="mini-textarea" placeholder="- Store appearance:&#10;- Website design & UI:&#10;- Packaging:&#10;- Reviews & testimonials:" data-save></textarea>
             </div>
           </div>
+        </section>
 
-          <div class="divider"></div>
-
-          <div class="dynamic-group-header">
-            <h3>Implementation Timeline & Roadmap</h3>
-            <button class="btn btn-primary btn-sm" id="btn-add-milestone">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <line x1="12" y1="5" x2="12" y2="19"/>
-                <line x1="5" y1="12" x2="19" y2="12"/>
-              </svg>
-              Add Milestone
-            </button>
+        <!-- SECTION 9: CONTENT STRATEGY -->
+        <section id="section-contentstrategy" class="strategy-section">
+          <div class="section-header-block">
+            <span class="step-num">MODULE 09</span>
+            <h2>Content Strategy</h2>
+            <p class="section-desc">Establish your core content categories, key messages, and publishing configurations.</p>
           </div>
 
-          <div id="timeline-container" class="timeline-wrapper">
-            <!-- Dynamic Milestones Inject Here -->
+          <div class="form-grid">
+            <div class="form-group full-width">
+              <label for="content-pillars">Content Pillars</label>
+              <textarea id="content-pillars" placeholder="- Educational:&#10;- Entertaining:&#10;- Promotional:&#10;- Community-building:" data-save></textarea>
+            </div>
+
+            <div class="form-group">
+              <label for="content-messages">Key Messages</label>
+              <textarea id="content-messages" placeholder="- Main brand message:&#10;- Supporting messages:" data-save></textarea>
+            </div>
+
+            <div class="form-group">
+              <label for="content-formats">Content Formats</label>
+              <textarea id="content-formats" placeholder="- Reels / Videos:&#10;- Static posts / Carousels:&#10;- Blogs / Articles:&#10;- Stories / Newsletters:" data-save></textarea>
+            </div>
+          </div>
+        </section>
+
+        <!-- SECTION 10: CHANNEL STRATEGY -->
+        <section id="section-channelstrategy" class="strategy-section">
+          <div class="section-header-block">
+            <span class="step-num">MODULE 10</span>
+            <h2>Channel Strategy</h2>
+            <p class="section-desc">Outline delivery, acquisition channels, and partnerships roadmap.</p>
+          </div>
+
+          <div class="form-grid">
+            <div class="form-group">
+              <label for="chan-social">Social Media</label>
+              <textarea id="chan-social" class="mini-textarea" placeholder="- Platforms to use:&#10;- Posting frequency:&#10;- Content types:" data-save></textarea>
+            </div>
+
+            <div class="form-group">
+              <label for="chan-influencers">Influencer Marketing</label>
+              <textarea id="chan-influencers" class="mini-textarea" placeholder="- Influencer types (Micro, Macro):&#10;- Campaign objectives:&#10;- Deliverables:" data-save></textarea>
+            </div>
+
+            <div class="form-group">
+              <label for="chan-paid">Paid Media</label>
+              <textarea id="chan-paid" class="mini-textarea" placeholder="- Meta ads / Google ads:&#10;- Display / Search ads:&#10;- Budget allocation & targets:" data-save></textarea>
+            </div>
+
+            <div class="form-group">
+              <label for="chan-email">Email Marketing</label>
+              <textarea id="chan-email" class="mini-textarea" placeholder="- Newsletter strategy:&#10;- Automation flows (Welcome, onboarding):" data-save></textarea>
+            </div>
+
+            <div class="form-group">
+              <label for="chan-seo">Website / SEO</label>
+              <textarea id="chan-seo" class="mini-textarea" placeholder="- SEO goals:&#10;- Landing pages:&#10;- Conversion optimization:" data-save></textarea>
+            </div>
+
+            <div class="form-group">
+              <label for="chan-partners">Partnerships</label>
+              <textarea id="chan-partners" class="mini-textarea" placeholder="- Strategic partners:&#10;- Collaborations / Co-marketing:&#10;- Sponsorships:" data-save></textarea>
+            </div>
+          </div>
+        </section>
+
+        <!-- SECTION 11: CAMPAIGN STRATEGY -->
+        <section id="section-campaignstrategy" class="strategy-section">
+          <div class="section-header-block">
+            <span class="step-num">MODULE 11</span>
+            <h2>Campaign Strategy</h2>
+            <p class="section-desc">Create targeted campaigns for each phase of the marketing funnel.</p>
+          </div>
+
+          <div class="form-grid">
+            <div class="form-group">
+              <label for="camp-awareness">Awareness Campaigns</label>
+              <textarea id="camp-awareness" placeholder="- Objective:&#10;- Key message:&#10;- Creative concept:" data-save></textarea>
+            </div>
+
+            <div class="form-group">
+              <label for="camp-consideration">Consideration Campaigns</label>
+              <textarea id="camp-consideration" placeholder="- Objective:&#10;- Proof points:&#10;- Testimonials:" data-save></textarea>
+            </div>
+
+            <div class="form-group">
+              <label for="camp-conversion">Conversion Campaigns</label>
+              <textarea id="camp-conversion" placeholder="- Offer / Promo:&#10;- Call to Action (CTA):&#10;- Landing page:" data-save></textarea>
+            </div>
+
+            <div class="form-group">
+              <label for="camp-retention">Retention Campaigns</label>
+              <textarea id="camp-retention" placeholder="- Loyalty programs:&#10;- Referral programs:&#10;- CRM / Email activities:" data-save></textarea>
+            </div>
+          </div>
+        </section>
+
+        <!-- SECTION 12: BUDGET ALLOCATION -->
+        <section id="section-budget" class="strategy-section">
+          <div class="section-header-block">
+            <span class="step-num">MODULE 12</span>
+            <h2>Budget Allocation</h2>
+            <p class="section-desc">Divide your projected budget percentage allocations across central marketing areas.</p>
+          </div>
+
+          <div class="form-grid">
+            <div class="form-group">
+              <label for="bud-content">Content Creation (%)</label>
+              <input type="text" id="bud-content" placeholder="e.g. 20%" data-save>
+            </div>
+
+            <div class="form-group">
+              <label for="bud-ads">Paid Advertising (%)</label>
+              <input type="text" id="bud-ads" placeholder="e.g. 40%" data-save>
+            </div>
+
+            <div class="form-group">
+              <label for="bud-influencers">Influencers (%)</label>
+              <input type="text" id="bud-influencers" placeholder="e.g. 15%" data-save>
+            </div>
+
+            <div class="form-group">
+              <label for="bud-production">Production (%)</label>
+              <input type="text" id="bud-production" placeholder="e.g. 10%" data-save>
+            </div>
+
+            <div class="form-group">
+              <label for="bud-events">Events & Activations (%)</label>
+              <input type="text" id="bud-events" placeholder="e.g. 10%" data-save>
+            </div>
+
+            <div class="form-group">
+              <label for="bud-research">Research & Analytics (%)</label>
+              <input type="text" id="bud-research" placeholder="e.g. 5%" data-save>
+            </div>
+          </div>
+        </section>
+
+        <!-- SECTION 13: KPIS -->
+        <section id="section-kpis" class="strategy-section">
+          <div class="section-header-block">
+            <span class="step-num">MODULE 13</span>
+            <h2>KPIs</h2>
+            <p class="section-desc">Establish analytical criteria to monitor brand growth and customer lifetime value.</p>
+          </div>
+
+          <div class="form-grid">
+            <div class="form-group">
+              <label for="kpi-awareness">Awareness KPIs</label>
+              <textarea id="kpi-awareness" class="mini-textarea" placeholder="- Reach:&#10;- Impressions:&#10;- Follower growth:&#10;- Share of voice:" data-save></textarea>
+            </div>
+
+            <div class="form-group">
+              <label for="kpi-engagement">Engagement KPIs</label>
+              <textarea id="kpi-engagement" class="mini-textarea" placeholder="- Engagement rate:&#10;- Comments:&#10;- Shares:&#10;- Saves:" data-save></textarea>
+            </div>
+
+            <div class="form-group">
+              <label for="kpi-lead">Lead Generation KPIs</label>
+              <textarea id="kpi-lead" class="mini-textarea" placeholder="- Leads generated:&#10;- Cost per lead (CPL):" data-save></textarea>
+            </div>
+
+            <div class="form-group">
+              <label for="kpi-conversion">Conversion KPIs</label>
+              <textarea id="kpi-conversion" class="mini-textarea" placeholder="- Sales volume:&#10;- Conversion rate (CVR):&#10;- Cost per acquisition (CPA):" data-save></textarea>
+            </div>
+
+            <div class="form-group">
+              <label for="kpi-retention">Retention KPIs</label>
+              <textarea id="kpi-retention" class="mini-textarea" placeholder="- Repeat purchase rate:&#10;- Customer lifetime value (CLV):&#10;- Churn rate:" data-save></textarea>
+            </div>
+
+            <div class="form-group">
+              <label for="kpi-roi">ROI KPIs</label>
+              <textarea id="kpi-roi" class="mini-textarea" placeholder="- Return on ad spend (ROAS):&#10;- Marketing ROI %:" data-save></textarea>
+            </div>
+          </div>
+        </section>
+
+        <!-- SECTION 14: IMPLEMENTATION TIMELINE -->
+        <section id="section-timeline" class="strategy-section">
+          <div class="section-header-block">
+            <span class="step-num">MODULE 14</span>
+            <h2>Implementation Timeline</h2>
+            <p class="section-desc">Create details of launch actions and scaling targets from Month 1 to Month 6.</p>
+          </div>
+
+          <div class="form-grid">
+            <div class="form-group">
+              <label for="time-m1">Month 1</label>
+              <textarea id="time-m1" placeholder="- Research:&#10;- Strategy development:&#10;- Content planning:" data-save></textarea>
+            </div>
+
+            <div class="form-group">
+              <label for="time-m2">Month 2</label>
+              <textarea id="time-m2" placeholder="- Campaign launch:&#10;- Influencer onboarding:" data-save></textarea>
+            </div>
+
+            <div class="form-group">
+              <label for="time-m3">Month 3</label>
+              <textarea id="time-m3" placeholder="- Optimization:&#10;- Performance review:" data-save></textarea>
+            </div>
+
+            <div class="form-group">
+              <label for="time-m4">Months 4–6</label>
+              <textarea id="time-m4" placeholder="- Scale successful campaigns:&#10;- Launch new initiatives:" data-save></textarea>
+            </div>
+          </div>
+        </section>
+
+        <!-- SECTION 15: RECOMMENDATIONS -->
+        <section id="section-recommendations" class="strategy-section">
+          <div class="section-header-block">
+            <span class="step-num">MODULE 15</span>
+            <h2>Recommendations</h2>
+            <p class="section-desc">Formulate short, medium, and long-term actions to sustain brand and market expansion.</p>
+          </div>
+
+          <div class="form-grid">
+            <div class="form-group full-width">
+              <label for="rec-quick">Quick Wins</label>
+              <textarea id="rec-quick" placeholder="- Immediate actions:&#10;- Low-cost opportunities:" data-save></textarea>
+            </div>
+
+            <div class="form-group">
+              <label for="rec-medium">Medium-Term Actions</label>
+              <textarea id="rec-medium" placeholder="- Growth initiatives:&#10;- Channel expansion:" data-save></textarea>
+            </div>
+
+            <div class="form-group">
+              <label for="rec-long">Long-Term Actions</label>
+              <textarea id="rec-long" placeholder="- Brand-building activities:&#10;- Market expansion:&#10;- New product/service opportunities:" data-save></textarea>
+            </div>
           </div>
         </section>
 
