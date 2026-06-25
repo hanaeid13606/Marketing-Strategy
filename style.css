@@ -643,32 +643,6 @@ textarea::placeholder, input::placeholder {
   height: 12px;
 }
 
-/* Sheet configuration bar styling */
-.sheet-config-bar {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  background: rgba(255, 255, 255, 0.015);
-  border: 1px dashed var(--border-color);
-  padding: 0.3rem 0.5rem;
-  border-radius: var(--radius-sm);
-  margin-top: 0.4rem;
-  width: 100%;
-  max-width: 480px;
-}
-
-.sheet-config-bar label {
-  font-size: 0.7rem;
-  white-space: nowrap;
-}
-
-.sheet-config-bar input {
-  padding: 0.2rem 0.4rem;
-  font-size: 0.78rem;
-  background: rgba(0, 0, 0, 0.25);
-  border: 1px solid rgba(255, 255, 255, 0.05);
-}
-
 /* ==========================================================================
    RESPONSIVE DESIGN BREAKPOINTS
    ========================================================================== */
