@@ -1,5 +1,5 @@
 /**
- * STRATEGIZE // Core Application JavaScript (15-Section Restructure)
+ * STRATEGIZE // Core Application JavaScript (15-Section Restructure + Google Sheets Integration)
  * Handles state management, local storage, tab navigation,
  * dynamic widget rendering, progress calculation, and JSON export/import.
  */
@@ -10,6 +10,9 @@
 let state = {
   // Static fields (mapped by DOM ID)
   staticFields: {
+    // Google Sheets Integration URL
+    'google-sheet-url': '',
+
     // 1. Business Overview
     'company-name': '',
     'company-industry': '',
@@ -329,7 +332,7 @@ function updateProgress() {
   let totalFields = 0;
   let filledFields = 0;
 
-  // Process static sections
+  // Process static sections (excluding configuration fields)
   for (const [section, fieldIds] of Object.entries(sectionInputs)) {
     if (fieldIds.length === 0) continue;
     
@@ -396,11 +399,55 @@ function setupEventListeners() {
     el.addEventListener('input', () => saveData());
   });
 
+  // Custom configuration event
+  const sheetUrlEl = document.getElementById('google-sheet-url');
+  if (sheetUrlEl) {
+    sheetUrlEl.addEventListener('input', () => {
+      state.staticFields['google-sheet-url'] = sheetUrlEl.value;
+      saveData();
+    });
+  }
+
   // Dynamic add buttons
   document.getElementById('btn-add-persona').addEventListener('click', () => {
     state.personas.push(createDefaultPersona(state.personas.length + 1));
     renderPersonas();
     saveData(true);
+  });
+
+  // Submit to Google Sheets API
+  document.getElementById('btn-submit-sheet').addEventListener('click', () => {
+    const url = state.staticFields['google-sheet-url'];
+    if (!url || url.trim() === '') {
+      alert("Please configure your Google Sheet API URL in the bar on top of the workspace.");
+      return;
+    }
+
+    const btn = document.getElementById('btn-submit-sheet');
+    const originalHTML = btn.innerHTML;
+    btn.disabled = true;
+    btn.textContent = "Submitting...";
+
+    // Send request
+    fetch(url, {
+      method: 'POST',
+      mode: 'no-cors', // bypass CORS preflight redirects from Google Script macros
+      headers: {
+        'Content-Type': 'text/plain'
+      },
+      body: JSON.stringify(state)
+    })
+    .then(() => {
+      alert("Strategy successfully submitted to Google Sheets!");
+    })
+    .catch((err) => {
+      console.error(err);
+      alert("Submit triggered. If it doesn't appear, check that your script is deployed for 'Anyone' and CORS is resolved.");
+    })
+    .finally(() => {
+      btn.disabled = false;
+      btn.innerHTML = originalHTML;
+    });
   });
 
   // Reset workspace
@@ -410,6 +457,7 @@ function setupEventListeners() {
       localStorage.removeItem(STORAGE_KEY);
       state = {
         staticFields: {
+          'google-sheet-url': '',
           'company-name': '', 'company-industry': '', 'company-products': '', 'company-usp': '', 'company-position': '', 'company-goals': '',
           'situation-market': '', 'situation-competitor': '', 'swot-s': '', 'swot-w': '', 'swot-o': '', 'swot-t': '',
           'audience-primary': '', 'audience-psychographics': '', 'audience-painpoints': '', 'audience-journey': '',
